@@ -15,7 +15,7 @@ use Mix.Config
 # which you typically run after static files are built.
 config :techtree, TechtreeWeb.Endpoint,
   load_from_system_env: true,
-  url: [host: "techtree.spiral.systems", port: 80],
+  url: [host: "montree.spiral.systems", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 

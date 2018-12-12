@@ -6,13 +6,13 @@ GENPASSWD() {
     openssl passwd hex 1 2 3 4 5 6|tr -d '/\n'
 }
 
-USERNAME=techtree
-DB_NAME=techtree
-DB_DOCKER_NAME=techtree-postgres
+USERNAME=montree
+DB_NAME=montree
+DB_DOCKER_NAME=montree-postgres
 PORT=4000
 OUT_PORT=${OUT_PORT:-8080}
 
-TT_DOCKER_NAME=${TT_DOCKER_NAME:-techtree}
+TT_DOCKER_NAME=${TT_DOCKER_NAME:-montree}
 
 if [ `docker ps -a --filter=name="${DB_DOCKER_NAME}"|wc -l` -eq 1 ]; then
     PASSWORD="`GENPASSWD`"
@@ -25,7 +25,7 @@ if [ `docker ps -a --filter=name="${DB_DOCKER_NAME}"|wc -l` -eq 1 ]; then
     # Wait for the DB to be active
     set +e
     for i in `seq 1 120`;do 
-        docker exec -i ${DB_DOCKER_NAME} psql -U techtree < /dev/null >>/dev/null 2>>/dev/null
+        docker exec -i ${DB_DOCKER_NAME} psql -U montree < /dev/null >>/dev/null 2>>/dev/null
         if [ $? -eq 0 ]; then
             break
         fi
@@ -34,7 +34,7 @@ if [ `docker ps -a --filter=name="${DB_DOCKER_NAME}"|wc -l` -eq 1 ]; then
     done
     set -e
 
-    docker exec -i ${DB_DOCKER_NAME} psql -U techtree < "./priv/repo/structure.sql"
+    docker exec -i ${DB_DOCKER_NAME} psql -U montree < "./priv/repo/structure.sql"
 else
     docker start ${DB_DOCKER_NAME}
 fi
@@ -50,4 +50,4 @@ docker run -d --name ${TT_DOCKER_NAME} -m 500m -p ${OUT_PORT}:${PORT} \
                                     -e SECRET_KEY_BASE="`GENPASSWD`" \
                                     -e PORT=${PORT} \
                                     -e MIX_ENV=prod \
-                                    techtree
+                                    montree

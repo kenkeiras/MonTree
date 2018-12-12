@@ -956,7 +956,7 @@ function draw_column_from(base_x_off, base_y_off,
                 if (init_column !== end_column) {
                     curve = [
                         "M", init.left, ",", init.top,
-                        " C", end.left + end_runway, ",", init.top,
+                        " C", end.left - end_runway, ",", init.top,
                         " ", end.left + end_runway, ",", end.top,
                         " ", end.left, ",", end.top
                     ].join("");

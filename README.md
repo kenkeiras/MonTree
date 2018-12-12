@@ -9,8 +9,8 @@ To start your server:
 
   * Install dependencies with `mix deps.get`
   * Install Node.js dependencies with `cd assets && npm install ; cd ..`
-  * Launch a docker postgres server with `docker run -d --name techtree-postgres -p 127.0.0.1:5432:5432 postgres`
-  * Create a database `docker exec --user postgres -it techtree-postgres psql -c 'create database techtree_dev;'`
+  * Launch a docker postgres server with `docker run -d --name montree-postgres -p 127.0.0.1:5432:5432 postgres`
+  * Create a database `docker exec --user postgres -it montree-postgres psql -c 'create database montree_dev;'`
   * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
   * Start Phoenix endpoint with `mix phx.server` or, to also get an interactive shell, `iex -S mix phx.server`
 

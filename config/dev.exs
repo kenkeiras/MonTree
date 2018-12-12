@@ -53,6 +53,6 @@ config :techtree, Techtree.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "techtree_dev",
+  database: "montree_dev",
   hostname: "localhost",
   pool_size: 10
