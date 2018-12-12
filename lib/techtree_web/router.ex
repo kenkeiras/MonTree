@@ -11,6 +11,7 @@ defmodule TechtreeWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :fetch_session
   end
 
   scope "/", TechtreeWeb do
@@ -39,6 +40,13 @@ defmodule TechtreeWeb.Router do
 
     resources "/projects/", ProjectController, param: "project_id", only: [:show]
     get "/api/projects/:project_id/dependencies", DependencyController, :dependency_graph
+  end
+
+  # Services used for MonTree (headless API)
+  scope "/", TechtreeWeb.Projects, as: :project do
+    pipe_through [:api, :authenticate_user]
+
+    get "/api/projects/:project_id/steps/", DependencyController, :api_get_steps_all
   end
 
   scope "/api/projects/", TechtreeWeb.Projects, as: :project do

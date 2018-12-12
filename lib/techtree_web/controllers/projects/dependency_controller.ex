@@ -52,6 +52,16 @@ defmodule TechtreeWeb.Projects.DependencyController do
     render(conn, "dependency_graph.json", graph: dependency_graph)
   end
 
+  def api_get_steps_all(conn, %{"project_id" => project_id}) do
+    dependency_graph = Projects.get_dependency_graph(conn.assigns.project)
+    csrf_token = get_csrf_token()
+
+    render(
+      put_resp_header(conn, "x-csrf-token", csrf_token),
+      "dependency_graph.json",
+      graph: dependency_graph)
+  end
+
   def get_step_dependencies(conn, %{"step_id" => step_id, "project_id" => project_id}) do
     step = Projects.get_step_with_dependencies!(step_id)
     available_steps = get_available_dependencies_for_step(conn, step)
