@@ -1,5 +1,7 @@
 import { GraphNode } from './graph_node';
 
+const InvertX = false;
+
 type Set = {[key: string]: true};
 
 type id = string | number;
@@ -232,7 +234,7 @@ class GridController {
         const result: id[][] = [];
 
         for (let i = 0; i < this.width; i++) {
-            let x = this.width - (i + 1); // This does the x-inversion
+            let x = i;
             const row = [];
 
             for (let y = 0; y < this.height; y++) {

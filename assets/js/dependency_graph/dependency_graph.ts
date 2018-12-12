@@ -324,7 +324,7 @@ function add_node(canvas, element, left, top, graph) {
     use_as_dependency_node.setAttribute('connector_side', 'right');
     use_as_dependency_node.setAttribute('element_id', element.id);
     use_as_dependency_node.setAttribute('element_state', element.state);
-    use_as_dependency_node.setAttributeNS(null, 'cx', left + box_width);
+    use_as_dependency_node.setAttributeNS(null, 'cx', left);
     use_as_dependency_node.setAttributeNS(null, 'cy', top + box_height / 2);
     use_as_dependency_node.setAttributeNS(null, 'r',
         Math.min(dependency_drag_node_real_size, box_height / 2.5) + "");
@@ -342,7 +342,7 @@ function add_node(canvas, element, left, top, graph) {
     add_dependency_node.setAttribute('connector_side', 'left');
     add_dependency_node.setAttribute('element_id', element.id);
     add_dependency_node.setAttribute('element_state', element.state);
-    add_dependency_node.setAttributeNS(null, 'cx', left);
+    add_dependency_node.setAttributeNS(null, 'cx', left + box_width);
     add_dependency_node.setAttributeNS(null, 'cy', top + box_height / 2);
     add_dependency_node.setAttributeNS(null, 'r',
         Math.min(dependency_drag_node_real_size, box_height / 2.5) + "");
@@ -943,10 +943,10 @@ function draw_column_from(base_x_off, base_y_off,
                 const end_column = nodes_map[element.id].column_num;
 
                 const init_element = nodes_map[dependency];
-                const init = init_element.right_middle;
+                const init = init_element.left_middle;
 
                 const end_element = nodes_map[element.id];
-                const end = end_element.left_middle;
+                const end = end_element.right_middle;
 
                 const path_element = document.createElementNS(SvgNS, 'path');
                 path_element.setAttribute('class',
@@ -956,16 +956,16 @@ function draw_column_from(base_x_off, base_y_off,
                 if (init_column !== end_column) {
                     curve = [
                         "M", init.left, ",", init.top,
-                        " C", end.left - end_runway, ",", init.top,
-                        " ", end.left - end_runway, ",", end.top,
+                        " C", end.left + end_runway, ",", init.top,
+                        " ", end.left + end_runway, ",", end.top,
                         " ", end.left, ",", end.top
                     ].join("");
                 }
                 else {
                     curve = [
                         "M", init.left, ",", init.top,
-                        " C", init.left + end_runway, ",", init.top,
-                        " ", end.left - end_runway, ",", end.top,
+                        " C", init.left - end_runway, ",", init.top,
+                        " ", end.left + end_runway, ",", end.top,
                         " ", end.left, ",", end.top
                     ].join("");
                 }
