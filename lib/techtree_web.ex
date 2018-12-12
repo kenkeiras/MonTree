@@ -46,11 +46,11 @@ defmodule TechtreeWeb do
       end
 
       def render("section_title_header.html", %{ project: project }) do
-        "#{project.name} @ TechTree"
+        "#{project.name} @ MonTree"
       end
 
       def render("section_title_header.html", _) do
-        "TechTree"
+        "MonTree"
       end
 
       def render("section_subtitle_header.html", %{ project: project, conn: conn }) do
@@ -59,7 +59,7 @@ defmodule TechtreeWeb do
       end
 
       def render("section_subtitle_header.html", _) do
-        "TechTree"
+        "MonTree"
       end
 
     end
